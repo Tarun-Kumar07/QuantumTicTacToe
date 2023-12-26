@@ -1,0 +1,6 @@
+LENGTH = 3
+NUM_QUBITS = LENGTH * LENGTH
+
+O = "0"
+X = "X"
+Q = "Q"
