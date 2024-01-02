@@ -1,5 +1,5 @@
-from player import Player
-from quantum_tic_tac_toe import QuantumTicTacToe
+from game.player import Player
+from game.quantum_tic_tac_toe import QuantumTicTacToe
 
 player1 = Player("One")
 player2 = Player("Two")
