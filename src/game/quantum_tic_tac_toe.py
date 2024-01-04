@@ -34,7 +34,9 @@ class QuantumTicTacToe(object):
     def collapse(self, coordinate: Coordinate):
         cell = self.board.get(coordinate)
         if is_collapsed(cell):
-            raise ValueError(f"{coordinate} is already collapsed")
+            raise ValueError(
+                f"{coordinate} is already collapsed. Choose your move again !!"
+            )
 
         coordinates_to_collapse = [coordinate]
 
@@ -60,7 +62,9 @@ class QuantumTicTacToe(object):
 
         target_cell = self.board.get(target)
         if not is_collapsed(target_cell):
-            raise ValueError(f"Target must be collapsed, {target} is not collapsed")
+            raise ValueError(
+                f"Target must be collapsed. {target} is not collapsed. Choose your move again !!"
+            )
 
         self.qc.cx(control_qubit, target_qubit)
 
@@ -114,6 +118,9 @@ class QuantumTicTacToe(object):
             self.qc.reset(to_measure)
             self.qc.x(to_measure)
             return X
+
+    def get_board(self) -> Board:
+        return self.board
 
     def __str__(self) -> str:
         return str(self.board)

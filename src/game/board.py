@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from game.coordinate import Coordinate
 from game.constants import Q
 
@@ -56,6 +58,9 @@ class Board(object):
 
     def get(self, coordinate: Coordinate):
         return self.board[coordinate.get_x()][coordinate.get_y()]
+
+    def get_all(self):
+        return deepcopy(self.board)
 
     def __str__(self) -> str:
         return "\n".join([" ".join([str(cell) for cell in row]) for row in self.board])
