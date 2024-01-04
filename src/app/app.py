@@ -54,6 +54,7 @@ def on_click_cell(x, y):
             assign_next_player()
         except Exception as e:
             st.error(e)
+        finally:
             reset_collapse_click_flags()
     elif null_safe_get_from_session(ENTANGLE_CLICKED):
         target_cell = null_safe_get_from_session(ENTAINGLE_CELL_CLICKED_FIRST)
@@ -64,6 +65,7 @@ def on_click_cell(x, y):
                 assign_next_player()
             except Exception as e:
                 st.error(e)
+            finally:
                 reset_entangle_click_flags()
         else:
             st.session_state.entangle_cell_clicked_first = Coordinate(x, y)
@@ -74,8 +76,10 @@ def cell_tool_tip():
         return "Click to collapse"
     elif null_safe_get_from_session(ENTAINGLE_CELL_CLICKED_FIRST):
         return "Choose control qubit"
-    else:
+    elif null_safe_get_from_session(ENTANGLE_CLICKED):
         return "Choose target qubit"
+    else:
+        return "Choose move first"
 
 
 def display_game(game: DeltaGenerator):
