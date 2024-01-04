@@ -1,8 +1,7 @@
 import streamlit as st
 from streamlit.delta_generator import DeltaGenerator
-from game.coordinate import Coordinate
-
-from game.quantum_tic_tac_toe import QuantumTicTacToe
+from game import Coordinate
+from game import QuantumTicTacToe
 
 ENTANGLE_CLICKED = "entangle_clicked"
 COLLAPSE_CLICKED = "collapse_clicked"
