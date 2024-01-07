@@ -1,6 +1,6 @@
 LENGTH = 3
 NUM_QUBITS = LENGTH * LENGTH
 
-O = "0"
+O = "O"
 X = "X"
 Q = "Q"
