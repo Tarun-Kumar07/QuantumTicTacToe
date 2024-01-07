@@ -61,9 +61,20 @@ class QuantumTicTacToe(object):
         control_qubit = get_qubit(control)
 
         target_cell = self.board.get(target)
-        if not is_collapsed(target_cell):
+        control_cell = self.board.get(control)
+        if not (is_collapsed(target_cell) or is_collapsed(control_cell)):
             raise ValueError(
-                f"Target must be collapsed. {target} cell is not collapsed. Choose your move again !!"
+                f"One of entangled cells must be collapsed. {control} and {target} are both in superposition . Choose your move again !!"
+            )
+
+        if self.is_entangled(control):
+            raise ValueError(
+                f"{control} cell is already entangled. Choose your move again !!"
+            )
+
+        if self.is_entangled(target):
+            raise ValueError(
+                f"{target} cell is already entangled. Choose your move again !!"
             )
 
         self.qc.cx(control_qubit, target_qubit)
@@ -71,6 +82,10 @@ class QuantumTicTacToe(object):
         self.entangled_qubits.put(control_qubit, target_qubit)
         self.board.set(control, Q)
         self.board.set(target, Q)
+
+    def is_entangled(self, coordinate: Coordinate):
+        qubit = get_qubit(coordinate)
+        return self.entangled_qubits.get(qubit) is not None
 
     def get_winner(self):
         return self.winner
