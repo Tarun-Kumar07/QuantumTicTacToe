@@ -17,7 +17,7 @@ class BiDirectionalMap:
         self.map[key1] = key2
         self.map[key2] = key1
 
-    def get(self, key) -> None | int:
+    def get(self, key):
         self.__validate_key(key)
         val = self.map[key]
         if val is not EMPTY_VALUE:
