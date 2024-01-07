@@ -54,7 +54,7 @@ def on_click_cell(x, y):
             st.session_state.game.collapse(coordinate)
             assign_next_player()
         except Exception as e:
-            st.error(e)
+            st.error(e, icon="⚠️")
         finally:
             reset_collapse_click_flags()
     elif null_safe_get_from_session(ENTANGLE_CLICKED):
@@ -65,7 +65,7 @@ def on_click_cell(x, y):
                 st.session_state.game.entangle(control_cell, target_cell)
                 assign_next_player()
             except Exception as e:
-                st.error(e)
+                st.error(e, icon="⚠️")
             finally:
                 reset_entangle_click_flags()
         else:
@@ -79,6 +79,8 @@ def cell_tool_tip():
         return "Choose control qubit"
     elif null_safe_get_from_session(ENTANGLE_CLICKED):
         return "Choose target qubit"
+    elif st.session_state.game.is_over():
+        return "Start new game"
     else:
         return "Choose move first"
 
