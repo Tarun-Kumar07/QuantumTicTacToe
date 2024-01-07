@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit.delta_generator import DeltaGenerator
 from game import Coordinate
 from game import QuantumTicTacToe
+from game.constants import O, X
 
 ENTANGLE_CLICKED = "entangle_clicked"
 COLLAPSE_CLICKED = "collapse_clicked"
@@ -10,8 +11,8 @@ COLLAPSE_BUTTON_TOOLTIP = (
     "If the chosen qubit is entangled it will collapse both qubits"
 )
 ENTANGLE_BUTTON_TOOLTIP = "Choose target qubit first then the control qubit"
-PLAYER_X = "X"
-PLAYER_O = "O"
+PLAYER_X = "❌"
+PLAYER_O = "⭕"
 
 
 def on_click_collapse():
@@ -82,13 +83,29 @@ def cell_tool_tip():
         return "Choose move first"
 
 
+def cell_display_value(cell: str):
+    if cell is X:
+        return "✗"
+    elif cell is O:
+        return "О"
+    else:
+        return "Q"
+
+
+def player_display_value(winner: str):
+    if winner is X:
+        return PLAYER_X
+    elif winner is O:
+        return PLAYER_O
+
+
 def display_game(game: DeltaGenerator):
     board = st.session_state.game.get_board()
     for x, row in enumerate(board.get_all()):
         cols = game.columns(len(row))
         for y, col in enumerate(row):
             cols[y].button(
-                col,
+                cell_display_value(col),
                 key=f"{x}-{y}",
                 on_click=on_click_cell,
                 args=(x, y),
@@ -99,10 +116,11 @@ def display_game(game: DeltaGenerator):
 def display_player(player: DeltaGenerator):
     game = st.session_state.game
     if game.is_over():
-        if game.get_winner():
-            player.write(f"Winner is {game.get_winner()}")
+        winner = game.get_winner()
+        if winner:
+            st.success(f"{player_display_value(winner)} won !!", icon="🎉")
         else:
-            player.write("Game is draw")
+            st.info("It's a tie !!", icon="🤝")
         player.button("New Game", on_click=lambda: st.session_state.clear())
     else:
         player.markdown(f"### {st.session_state.current_player}'s turn")
@@ -123,7 +141,7 @@ def initialize_session():
 
 def run_game():
     page_title = "Quantum Tic-Tac-Toe"
-    page_icon = "👋"
+    page_icon = "🎮"
     layout = "centered"
 
     st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
