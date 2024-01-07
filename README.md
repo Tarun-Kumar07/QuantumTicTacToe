@@ -4,7 +4,7 @@ This is quantum version of traditional tic tac toe. <br>
 It is implemented by referring to this 
 <a href="https://physlab.org/wp-content/uploads/2023/05/QuantumTicTacToe_23100002_Fin.pdf" target="_blank">paper</a>.
 Refer to the <u>rules</u> section in the paper.<br>
-You can play the game <a href="https://quantumtictactoe-x8c6frhhbefcd9csgldfkr.streamlit.app" target="_blank">here</a>.
+You can play the game <a href="https://quantumtictactoe-ekm2cauxbumdelekkkaxqz.streamlit.app/" target="_blank">here</a>.
 If the link is not working then run game locally by refering to this [section](#Locally-run-the-game)<br>
 
 ### Locally run the game
