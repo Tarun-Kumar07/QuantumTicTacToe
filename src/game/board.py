@@ -46,10 +46,10 @@ class Board(object):
             column.append(row[col_index])
         return column
 
-    def all_cells_collapsed(self):
+    def all_tiles_collapsed(self):
         for row in self.board:
-            for cell in row:
-                if cell == Q:
+            for tile in row:
+                if tile == Q:
                     return False
         return True
 
@@ -63,4 +63,4 @@ class Board(object):
         return deepcopy(self.board)
 
     def __str__(self) -> str:
-        return "\n".join([" ".join([str(cell) for cell in row]) for row in self.board])
+        return "\n".join([" ".join([str(tile) for tile in row]) for row in self.board])

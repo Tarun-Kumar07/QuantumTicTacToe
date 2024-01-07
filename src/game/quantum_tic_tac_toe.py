@@ -5,8 +5,8 @@ from game.constants import Q, O, X, LENGTH, NUM_QUBITS
 from qiskit import QuantumCircuit, execute, Aer
 
 
-def is_collapsed(cell: str) -> bool:
-    return cell == O or cell == X
+def is_collapsed(tile: str) -> bool:
+    return tile == O or tile == X
 
 
 def get_qubit(coordinate: Coordinate) -> int:
@@ -32,10 +32,10 @@ class QuantumTicTacToe(object):
         self.winner = None
 
     def collapse(self, coordinate: Coordinate):
-        cell = self.board.get(coordinate)
-        if is_collapsed(cell):
+        tile = self.board.get(coordinate)
+        if is_collapsed(tile):
             raise ValueError(
-                f"{coordinate} cell is already collapsed. Choose your move again !!"
+                f"{coordinate} tile is already collapsed. Choose your move again !!"
             )
 
         coordinates_to_collapse = [coordinate]
@@ -60,21 +60,21 @@ class QuantumTicTacToe(object):
         target_qubit = get_qubit(target)
         control_qubit = get_qubit(control)
 
-        target_cell = self.board.get(target)
-        control_cell = self.board.get(control)
-        if not (is_collapsed(target_cell) or is_collapsed(control_cell)):
+        target_tile = self.board.get(target)
+        control_tile = self.board.get(control)
+        if not (is_collapsed(target_tile) or is_collapsed(control_tile)):
             raise ValueError(
-                f"One of entangled cells must be collapsed. {control} and {target} are both in superposition . Choose your move again !!"
+                f"One of entangled tiles must be collapsed. {control} and {target} are both in superposition . Choose your move again !!"
             )
 
         if self.is_entangled(control):
             raise ValueError(
-                f"{control} cell is already entangled. Choose your move again !!"
+                f"{control} tile is already entangled. Choose your move again !!"
             )
 
         if self.is_entangled(target):
             raise ValueError(
-                f"{target} cell is already entangled. Choose your move again !!"
+                f"{target} tile is already entangled. Choose your move again !!"
             )
 
         self.qc.cx(control_qubit, target_qubit)
@@ -92,7 +92,7 @@ class QuantumTicTacToe(object):
 
     def is_over(self):
         self.winner = self.board.get_winner()
-        return self.winner is not None or self.board.all_cells_collapsed()
+        return self.winner is not None or self.board.all_tiles_collapsed()
 
     def __collapse_coordinates(self, coordinates):
         qubits = [get_qubit(c) for c in coordinates]

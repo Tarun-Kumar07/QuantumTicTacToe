@@ -7,10 +7,8 @@ from game.constants import O, X
 ENTANGLE_CLICKED = "entangle_clicked"
 COLLAPSE_CLICKED = "collapse_clicked"
 ENTAINGLE_CELL_CLICKED_FIRST = "entangle_cell_clicked_first"
-COLLAPSE_BUTTON_TOOLTIP = (
-    "If the chosen qubit is entangled it will collapse both qubits"
-)
-ENTANGLE_BUTTON_TOOLTIP = "Choose target qubit first then the control qubit"
+COLLAPSE_BUTTON_TOOLTIP = "If the chosen tile is entangled it will collapse both tiles"
+ENTANGLE_BUTTON_TOOLTIP = "Choose tiles to entangle"
 PLAYER_X = "❌"
 PLAYER_O = "⭕"
 
@@ -127,10 +125,10 @@ def display_player(player: DeltaGenerator):
     else:
         player.markdown(f"### {st.session_state.current_player}'s turn")
         player.button(
-            "Collapse", on_click=on_click_collapse, help=COLLAPSE_BUTTON_TOOLTIP
+            "Collapse 💥", on_click=on_click_collapse, help=COLLAPSE_BUTTON_TOOLTIP
         )
         player.button(
-            "Entangle", on_click=on_click_entangle, help=ENTANGLE_BUTTON_TOOLTIP
+            "Entangle ⚛️ ", on_click=on_click_entangle, help=ENTANGLE_BUTTON_TOOLTIP
         )
 
 
