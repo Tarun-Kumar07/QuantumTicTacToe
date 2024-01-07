@@ -12,10 +12,10 @@ If the link is not working then run game locally by refering to this [section](#
 - Once the docker is up and running paste the commands below in terminal.
 - Create docker image <br>
 ```bash
-    docker build -t quantum-tic-tac-toe https://github.com/Tarun-Kumar07/QuantumTicTacToe.git
+ docker build -t quantum-tic-tac-toe https://github.com/Tarun-Kumar07/QuantumTicTacToe.git
 ```
 - Run docker image
 ```bash
  docker run -p 8501:8501 quantum-tic-tac-toe
 ```
-- Play the game by going to the url printed :).
+- Play the game by going to the url printed :smile:.
