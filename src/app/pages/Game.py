@@ -83,7 +83,6 @@ def cell_tool_tip():
 
 
 def display_game(game: DeltaGenerator):
-    game.write("Game")
     board = st.session_state.game.get_board()
     for x, row in enumerate(board.get_all()):
         cols = game.columns(len(row))
@@ -106,7 +105,7 @@ def display_player(player: DeltaGenerator):
             player.write("Game is draw")
         player.button("New Game", on_click=lambda: st.session_state.clear())
     else:
-        player.write(f"Player {st.session_state.current_player}'s turn")
+        player.markdown(f"### {st.session_state.current_player}'s turn")
         player.button(
             "Collapse", on_click=on_click_collapse, help=COLLAPSE_BUTTON_TOOLTIP
         )
@@ -124,13 +123,18 @@ def initialize_session():
 
 def run_game():
     page_title = "Quantum Tic-Tac-Toe"
+    page_icon = "👋"
     layout = "centered"
 
-    st.set_page_config(page_title=page_title, layout=layout)
-    st.write("Quantum tic-tac-toe")
+    st.set_page_config(page_title=page_title, page_icon=page_icon, layout=layout)
+    st.markdown("### Quantum tic-tac-toe")
 
     initialize_session()
 
     game, player = st.columns([0.7, 0.3])
     display_game(game)
     display_player(player)
+
+
+if __name__ == "__main__":
+    run_game()
