@@ -4,7 +4,7 @@ from game.constants import O, LENGTH, X
 import pytest
 
 
-@pytest.mark.parametrize("column", [O, 1, 2])
+@pytest.mark.parametrize("column", [0, 1, 2])
 def test_winner_column(column):
     board = Board()
     for i in range(LENGTH):
@@ -14,7 +14,7 @@ def test_winner_column(column):
     assert board.get_winner() == O
 
 
-@pytest.mark.parametrize("row", [O, 1, 2])
+@pytest.mark.parametrize("row", [0, 1, 2])
 def test_winner_row(row):
     board = Board()
     for i in range(LENGTH):
@@ -64,7 +64,7 @@ def test_board_should_have_no_winner_when_all_are_collapsed():
     # 0 0 X
     # X X 0
 
-    assert board.all_cells_collapsed() is True
+    assert board.all_tiles_collapsed() is True
     assert board.get_winner() is None
 
 
