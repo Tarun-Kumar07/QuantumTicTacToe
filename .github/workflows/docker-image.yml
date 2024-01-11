@@ -28,5 +28,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: quantum-tic-tac-toe:latest
+          tags: ghcr.io/quantum-tic-tac-toe:latest
 
